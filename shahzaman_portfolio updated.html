@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shahzaman Ajmal — Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f8f7f4;
+    --bg2: #f0ede6;
+    --card: #ffffff;
+    --text: #1a1a1a;
+    --muted: #6b6b6b;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.14);
+    --accent: #e8c547;
+    --tag-bg: #f0ede6;
+    --tag-text: #1a1a1a;
+    --nav-bg: rgba(248,247,244,0.92);
+    --mun-dark: #1a1a2e;
+    --soft-bg: #ffffff;
+    --input-bg: #ffffff;
+    --shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --transition: 0.3s ease;
+  }
+
+  [data-theme="dark"] {
+    --bg: #111111;
+    --bg2: #1a1a1a;
+    --card: #1e1e1e;
+    --text: #f0ede6;
+    --muted: #888888;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --tag-bg: #2a2a2a;
+    --tag-text: #d4d0c8;
+    --nav-bg: rgba(17,17,17,0.92);
+    --mun-dark: #0d0d1f;
+    --soft-bg: #1e1e1e;
+    --input-bg: #252525;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    transition: background var(--transition), color var(--transition);
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 62px;
+    transition: background var(--transition);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.5px; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 1.8rem; list-style: none; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; cursor: pointer; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+  .theme-toggle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--tag-bg); border: 0.5px solid var(--border2);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 16px; transition: background 0.2s, transform 0.2s;
+  }
+  .theme-toggle:hover { transform: scale(1.1); }
+
+  .nav-cta {
+    background: var(--text); color: var(--bg);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    padding: 8px 20px; border-radius: 100px; border: none; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── SECTIONS ── */
+  .section-wrap { max-width: 920px; margin: 0 auto; padding: 90px 2.5rem; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 22px;
+  }
+  .divider { height: 0.5px; background: var(--border); max-width: 920px; margin: 0 auto; }
+
+  /* ── SCROLL FADE-IN ── */
+  .fade-in {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ── HERO ── */
+  #hero { padding-top: 140px; padding-bottom: 100px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--tag-bg); border: 0.5px solid var(--border2);
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 500; color: var(--muted); margin-bottom: 30px;
+    animation: fadeDown 0.6s ease both;
+  }
+  .hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #4caf50; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(24px)}  to{opacity:1;transform:translateY(0)} }
+
+  #hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(46px, 7vw, 72px);
+    font-weight: 800; line-height: 1.04; letter-spacing: -2.5px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  #hero h1 em { font-style: normal; color: var(--muted); }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); max-width: 530px;
+    line-height: 1.75; margin-bottom: 38px;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; animation: fadeUp 0.7s 0.3s ease both; }
+  .btn-primary {
+    background: var(--text); color: var(--bg);
+    padding: 13px 30px; border-radius: 100px; font-size: 14px; font-weight: 500;
+    border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: var(--text);
+    padding: 13px 30px; border-radius: 100px; font-size: 14px; font-weight: 500;
+    border: 1.5px solid var(--border2); cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { background: var(--tag-bg); transform: translateY(-1px); }
+  .hero-stats {
+    display: flex; gap: 44px; flex-wrap: wrap;
+    margin-top: 60px; padding-top: 44px; border-top: 0.5px solid var(--border);
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .hero-stat-num { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; }
+  .hero-stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: start; }
+  .about-text h2 { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin-bottom: 18px; }
+  .about-text p { color: var(--muted); line-height: 1.85; margin-bottom: 14px; font-size: 14.5px; }
+  .about-cards { display: flex; flex-direction: column; gap: 14px; }
+  .about-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 18px 20px;
+    transition: border-color 0.2s, transform 0.2s, background var(--transition);
+  }
+  .about-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .about-card-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .about-card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── EDUCATION ── */
+  .edu-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 16px; padding: 26px 28px;
+    display: flex; gap: 20px; align-items: flex-start;
+    transition: background var(--transition);
+  }
+  .edu-icon {
+    width: 46px; height: 46px; border-radius: 12px; background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .edu-school { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .edu-year { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .edu-badge {
+    display: inline-block; background: #eaf3de; color: #3B6D11;
+    font-size: 11px; font-weight: 600; padding: 3px 11px; border-radius: 100px; margin-top: 9px;
+  }
+  [data-theme="dark"] .edu-badge { background: #1a2e1a; color: #7bc97b; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .skill-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 20px;
+    transition: background var(--transition), transform 0.2s;
+  }
+  .skill-card:hover { transform: translateY(-2px); }
+  .skill-card-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 14px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 12px; padding: 4px 10px; border-radius: 6px;
+    transition: background var(--transition);
+  }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .project-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 18px; padding: 26px; cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .project-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--shadow); }
+  .project-card.expanded { transform: none; grid-column: 1 / -1; }
+  .project-num { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1px; margin-bottom: 14px; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .project-tag { background: var(--tag-bg); font-size: 11px; padding: 3px 9px; border-radius: 5px; color: var(--muted); }
+  .project-expand-hint { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .expand-arrow { display: inline-block; transition: transform 0.3s; }
+  .project-card.expanded .expand-arrow { transform: rotate(180deg); }
+
+  .project-details {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.45s ease, opacity 0.35s ease, padding 0.3s ease;
+    opacity: 0;
+  }
+  .project-card.expanded .project-details {
+    max-height: 600px; opacity: 1; padding-top: 20px;
+  }
+  .project-details-inner { border-top: 0.5px solid var(--border); padding-top: 20px; }
+  .project-features-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+  .project-features { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .project-features li {
+    font-size: 13px; color: var(--muted); padding-left: 18px; position: relative; line-height: 1.6;
+  }
+  .project-features li::before {
+    content: ''; position: absolute; left: 0; top: 7px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .btn-code {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--text); color: var(--bg);
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    padding: 10px 22px; border-radius: 100px; text-decoration: none;
+    transition: opacity 0.2s, transform 0.15s; border: none; cursor: pointer;
+  }
+  .btn-code:hover { opacity: 0.85; transform: translateY(-1px); }
+  .btn-code svg { width: 15px; height: 15px; fill: currentColor; }
+
+  /* ── MUN ── */
+  .mun-card {
+    background: var(--mun-dark); color: #fff;
+    border-radius: 22px; padding: 44px; position: relative; overflow: hidden; margin-bottom: 22px;
+    transition: background var(--transition);
+  }
+  .mun-card h2 { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -1px; margin-bottom: 10px; }
+  .mun-card p { color: rgba(255,255,255,0.58); font-size: 14px; line-height: 1.78; max-width: 580px; margin-bottom: 30px; }
+  .mun-details { display: flex; gap: 36px; flex-wrap: wrap; }
+  .mun-detail-label { font-size: 11px; color: rgba(255,255,255,0.38); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; }
+  .mun-detail-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .mun-accent { position: absolute; right: -50px; top: -50px; width: 220px; height: 220px; border-radius: 50%; background: var(--accent); opacity: 0.1; pointer-events: none; }
+  .mun-roles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .mun-role-tag { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.78); font-size: 12px; padding: 5px 13px; border-radius: 100px; }
+  .upcoming-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(232,197,71,0.15); color: var(--accent);
+    font-size: 11px; font-weight: 600; padding: 5px 13px;
+    border-radius: 100px; border: 0.5px solid rgba(232,197,71,0.3); margin-bottom: 22px;
+  }
+
+  .delegate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+  .delegate-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 18px 20px;
+    transition: background var(--transition), transform 0.2s;
+  }
+  .delegate-card:hover { transform: translateY(-2px); }
+  .delegate-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
+  .delegate-committee { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; }
+  .delegate-country { background: var(--tag-bg); font-size: 11px; padding: 3px 10px; border-radius: 100px; color: var(--muted); font-weight: 500; white-space: nowrap; }
+  .delegate-desc { font-size: 12.5px; color: var(--muted); line-height: 1.62; }
+
+  .soft-skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .soft-skill {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 20px; text-align: center;
+    transition: background var(--transition), transform 0.2s;
+  }
+  .soft-skill:hover { transform: translateY(-2px); }
+  .soft-skill-icon { font-size: 22px; margin-bottom: 9px; }
+  .soft-skill-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
+  .soft-skill-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .testimonial-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 16px; padding: 26px;
+    transition: background var(--transition), transform 0.2s;
+  }
+  .testimonial-card:hover { transform: translateY(-2px); }
+  .testimonial-quote { font-size: 14px; color: var(--muted); line-height: 1.82; margin-bottom: 20px; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 12px; }
+  .testimonial-avatar {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 800; color: var(--muted); flex-shrink: 0;
+  }
+  .testimonial-name { font-weight: 600; font-size: 13px; }
+  .testimonial-role { font-size: 12px; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: start; }
+  .contact-left h2 { font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 14px; }
+  .contact-left p { color: var(--muted); font-size: 14.5px; line-height: 1.75; margin-bottom: 28px; }
+  .contact-links { display: flex; flex-direction: column; gap: 11px; }
+  .contact-link {
+    display: flex; align-items: center; gap: 13px; text-decoration: none; color: var(--text);
+    font-size: 14px; padding: 13px 16px; background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 12px; transition: border-color 0.2s, transform 0.2s, background var(--transition);
+  }
+  .contact-link:hover { border-color: var(--border2); transform: translateX(3px); }
+  .contact-link-icon {
+    width: 34px; height: 34px; border-radius: 9px; background: var(--tag-bg);
+    display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
+  }
+  .contact-link-val { font-size: 13.5px; }
+  .contact-link-label { font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+  .form-group { margin-bottom: 14px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 500; margin-bottom: 6px; color: var(--muted); }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 11px 15px;
+    border: 0.5px solid var(--border2); border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px;
+    background: var(--input-bg); color: var(--text);
+    outline: none; transition: border-color 0.2s, background var(--transition), color var(--transition);
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--text); }
+  .form-group textarea { min-height: 105px; resize: vertical; }
+  .form-submit {
+    width: 100%; background: var(--text); color: var(--bg);
+    padding: 13px; border-radius: 10px; font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; border: none; cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: 920px; margin: 0 auto;
+    padding: 32px 2.5rem 44px;
+    border-top: 0.5px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 15px; }
+  .footer-copy { font-size: 12px; color: var(--muted); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .about-grid, .contact-grid, .projects-grid, .testimonials-grid, .delegate-grid { grid-template-columns: 1fr; }
+    .soft-skills-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 28px; }
+    #hero h1 { letter-spacing: -1.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="#hero">SA<span>.</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a onclick="scrollTo('about')">About</a></li>
+      <li><a onclick="scrollTo('projects')">Projects</a></li>
+      <li><a onclick="scrollTo('leadership')">Leadership</a></li>
+      <li><a onclick="scrollTo('contact')">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" id="themeBtn">🌙</button>
+      <button class="nav-cta">Resume</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="section-wrap" id="hero">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>Open to opportunities</div>
+  <h1>Builder.<br><em>Leader.</em><br>Developer.</h1>
+  <p class="hero-sub">Full Stack Developer &amp; Co-Pioneer of BULC MUN. I build scalable web products and lead teams — from command line to conference rooms.</p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="scrollTo('projects')">View My Work</button>
+    <button class="btn-secondary" onclick="scrollTo('contact')">Get in Touch</button>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hero-stat-num">4+</div><div class="hero-stat-label">Production Projects</div></div>
+    <div><div class="hero-stat-num">2+</div><div class="hero-stat-label">Years of Experience</div></div>
+    <div><div class="hero-stat-num">300+</div><div class="hero-stat-label">MUN Delegates (Upcoming)</div></div>
+    <div><div class="hero-stat-num">2028</div><div class="hero-stat-label">Expected Graduation</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about">
+  <div class="section-label fade-in">About Me</div>
+  <div class="about-grid">
+    <div class="about-text fade-in fade-in-delay-1">
+      <h2>I code, lead, and build things that matter.</h2>
+      <p>I'm a BS Computer Science student and full-stack developer from Lahore, Pakistan. My work lives at the intersection of clean engineering, product thinking, and real-world impact.</p>
+      <p>Beyond the code, I co-pioneered BULC MUN — one of the most ambitious inter-university diplomatic simulations in Lahore — managing teams, finances, and execution from scratch.</p>
+      <p>I don't just ship features. I think about the problem, architect the solution, and see it through.</p>
+    </div>
+    <div class="about-cards fade-in fade-in-delay-2">
+      <div class="about-card"><div class="about-card-title">Clean Architecture</div><div class="about-card-body">Maintainable, scalable code. I care as much about the structure as the output.</div></div>
+      <div class="about-card"><div class="about-card-title">Systems Thinker</div><div class="about-card-body">Whether it's a codebase or a 300-delegate event — I build systems that don't break under pressure.</div></div>
+      <div class="about-card"><div class="about-card-title">Fast Ship, Fast Learn</div><div class="about-card-body">New tools, new frameworks, new domains — I ramp up fast and move with purpose.</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<div class="section-wrap" id="education">
+  <div class="section-label fade-in">Education</div>
+  <div class="edu-card fade-in fade-in-delay-1">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">Bachelor of Science — Computer Science</div>
+      <div class="edu-school">Bahria University Lahore Campus (BULC), Lahore</div>
+      <div class="edu-year">2024 – Expected 2028</div>
+      <div class="edu-badge">Currently Enrolled</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<div class="section-wrap" id="skills">
+  <div class="section-label fade-in">Technical Expertise</div>
+  <div class="skills-grid">
+    <div class="skill-card fade-in fade-in-delay-1"><div class="skill-card-title">Languages</div><div class="skill-tags"><span class="tag">C++</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span></div></div>
+    <div class="skill-card fade-in fade-in-delay-2"><div class="skill-card-title">Frontend</div><div class="skill-tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Tailwind CSS</span><span class="tag">HTML/CSS</span></div></div>
+    <div class="skill-card fade-in fade-in-delay-3"><div class="skill-card-title">Backend &amp; DB</div><div class="skill-tags"><span class="tag">Node.js</span><span class="tag">Supabase</span><span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">OAuth</span></div></div>
+    <div class="skill-card fade-in fade-in-delay-4"><div class="skill-card-title">Tools &amp; Infra</div><div class="skill-tags"><span class="tag">Git</span><span class="tag">Vercel</span><span class="tag">AWS</span><span class="tag">Linux/Unix</span><span class="tag">Stripe</span></div></div>
+    <div class="skill-card fade-in fade-in-delay-1"><div class="skill-card-title">CS Fundamentals</div><div class="skill-tags"><span class="tag">DSA</span><span class="tag">OOP</span><span class="tag">Algorithms</span></div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects">
+  <div class="section-label fade-in">Featured Projects</div>
+  <div class="projects-grid" id="projectsGrid">
+
+    <div class="project-card fade-in fade-in-delay-1" onclick="toggleProject(this)">
+      <div class="project-num">01 — AI TOOLING</div>
+      <div class="project-title">Copy.ai Clone</div>
+      <div class="project-desc">AI-powered content generation platform with multiple writing modes, prompt engineering, and a clean editor interface.</div>
+      <div class="project-stack"><span class="project-tag">Next.js</span><span class="project-tag">Supabase</span><span class="project-tag">OpenAI API</span><span class="project-tag">Tailwind</span></div>
+      <div class="project-expand-hint">Click to explore <span class="expand-arrow">↓</span></div>
+      <div class="project-details">
+        <div class="project-details-inner">
+          <div class="project-features-title">Key Features</div>
+          <ul class="project-features">
+            <li>Multiple AI writing tools — blog posts, ad copy, emails, product descriptions</li>
+            <li>Prompt templating system with user-editable inputs</li>
+            <li>Authentication with Supabase and persistent document history</li>
+            <li>Responsive editor with real-time streaming output</li>
+            <li>Token usage tracking and rate limiting per user</li>
+          </ul>
+          <a class="btn-code" href="https://github.com/Shazam-byte/ai-copywriter" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-2" onclick="toggleProject(this)">
+      <div class="project-num">02 — E-COMMERCE</div>
+      <div class="project-title">Full-Stack Store</div>
+      <div class="project-desc">End-to-end shopping platform with product management, cart, Stripe payments, and admin dashboard.</div>
+      <div class="project-stack"><span class="project-tag">Next.js</span><span class="project-tag">Supabase</span><span class="project-tag">Stripe</span><span class="project-tag">Vercel</span></div>
+      <div class="project-expand-hint">Click to explore <span class="expand-arrow">↓</span></div>
+      <div class="project-details">
+        <div class="project-details-inner">
+          <div class="project-features-title">Key Features</div>
+          <ul class="project-features">
+            <li>Full product catalog with categories, filters, and search</li>
+            <li>Cart and checkout flow with Stripe payment integration</li>
+            <li>Admin dashboard for inventory and order management</li>
+            <li>User authentication with order history and profile management</li>
+            <li>Responsive design optimized for mobile and desktop</li>
+          </ul>
+          <a class="btn-code" href="https://github.com/Shazam-byte/breeze-e-shop" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-3" onclick="toggleProject(this)">
+      <div class="project-num">03 — REAL ESTATE</div>
+      <div class="project-title">Property Platform</div>
+      <div class="project-desc">Property listing and search platform with interactive maps, filters, and agent contact flows.</div>
+      <div class="project-stack"><span class="project-tag">Next.js</span><span class="project-tag">PostgreSQL</span><span class="project-tag">Maps API</span></div>
+      <div class="project-expand-hint">Click to explore <span class="expand-arrow">↓</span></div>
+      <div class="project-details">
+        <div class="project-details-inner">
+          <div class="project-features-title">Key Features</div>
+          <ul class="project-features">
+            <li>Advanced property search with location, price, and type filters</li>
+            <li>Interactive map with property pins and cluster views</li>
+            <li>Detailed listing pages with photo galleries and floor plans</li>
+            <li>Agent contact form and inquiry management system</li>
+            <li>Saved listings and user account functionality</li>
+          </ul>
+          <a class="btn-code" href="https://github.com/Shazam-byte/estate-elite-exchange" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card fade-in fade-in-delay-4" onclick="toggleProject(this)">
+      <div class="project-num">04 — FASHION TECH</div>
+      <div class="project-title">Smart Wardrobe App</div>
+      <div class="project-desc">AI-assisted outfit builder with a social suggestion feed and brand sale tracker. Built for the US market.</div>
+      <div class="project-stack"><span class="project-tag">Next.js</span><span class="project-tag">Supabase</span><span class="project-tag">AI</span><span class="project-tag">Tailwind</span></div>
+      <div class="project-expand-hint">Click to explore <span class="expand-arrow">↓</span></div>
+      <div class="project-details">
+        <div class="project-details-inner">
+          <div class="project-features-title">Key Features</div>
+          <ul class="project-features">
+            <li>Smart wardrobe organizer — digitize and categorize your clothing items</li>
+            <li>AI-powered outfit builder with style recommendations</li>
+            <li>Social feed for sharing and discovering outfits from the community</li>
+            <li>Brand sale tracker with notifications for favorited brands</li>
+            <li>US market-focused design with trend-aware suggestions</li>
+          </ul>
+          <a class="btn-code" href="https://github.com/Shazam-byte/ClosetCircle" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.805 5.625-5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            View Code
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LEADERSHIP -->
+<div class="section-wrap" id="leadership">
+  <div class="section-label fade-in">Leadership &amp; Diplomacy</div>
+
+  <div class="mun-card fade-in fade-in-delay-1">
+    <div class="mun-accent"></div>
+    <div class="upcoming-badge">Upcoming — August 2026</div>
+    <h2>Co-Pioneer, BULC MUN</h2>
+    <p>Building BULC Model United Nations from the ground up alongside Talha — handling team recruitment, inter-university coordination, university approvals, finances, and full on-the-ground execution. One of the most ambitious student-led diplomatic simulations in Lahore, expecting 300+ delegates across multiple committees.</p>
+    <div class="mun-details">
+      <div class="mun-detail"><div class="mun-detail-label">Scheduled</div><div class="mun-detail-val">August 2026</div></div>
+      <div class="mun-detail"><div class="mun-detail-label">Expected Scale</div><div class="mun-detail-val">300+ Delegates</div></div>
+      <div class="mun-detail"><div class="mun-detail-label">Role</div><div class="mun-detail-val">Co-Pioneer &amp; Top Management</div></div>
+    </div>
+    <div class="mun-roles">
+      <span class="mun-role-tag">Team Management</span>
+      <span class="mun-role-tag">Inter-University Coordination</span>
+      <span class="mun-role-tag">Finance &amp; Approvals</span>
+      <span class="mun-role-tag">Event Operations</span>
+    </div>
+  </div>
+
+  <div class="section-label fade-in" style="margin-top:38px;">Delegate Experience</div>
+  <p class="fade-in" style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:600px;">Competed as a delegate across multiple UN committees, representing different countries and crafting position papers, floor speeches, and bloc strategies.</p>
+
+  <div class="delegate-grid">
+    <div class="delegate-card fade-in fade-in-delay-1">
+      <div class="delegate-card-header"><div class="delegate-committee">Pakistan National Assembly</div><div class="delegate-country">Rahila Durrani</div></div>
+      <div class="delegate-desc">Represented a national legislator in domestic policy debate, crafting legislation-style arguments and navigating parliamentary procedure.</div>
+    </div>
+    <div class="delegate-card fade-in fade-in-delay-2">
+      <div class="delegate-card-header"><div class="delegate-committee">Crisis Committee</div><div class="delegate-country">United Kingdom</div></div>
+      <div class="delegate-desc">Fast-paced crisis simulation requiring real-time strategic decisions, bloc formation, and rapid position adaptation under pressure.</div>
+    </div>
+    <div class="delegate-card fade-in fade-in-delay-3">
+      <div class="delegate-card-header"><div class="delegate-committee">WOAH</div><div class="delegate-country">Egypt</div></div>
+      <div class="delegate-desc">Represented Egypt in the World Organisation for Animal Health, arguing national interests on global health and agricultural policy.</div>
+    </div>
+    <div class="delegate-card fade-in fade-in-delay-4">
+      <div class="delegate-card-header"><div class="delegate-committee">UNHRC</div><div class="delegate-country">Cuba</div></div>
+      <div class="delegate-desc">Argued Cuba's position at the UN Human Rights Council — defending contested stances through evidence-based debate and bloc diplomacy.</div>
+    </div>
+  </div>
+
+  <div class="section-label fade-in" style="margin-top:42px;">Soft Skills</div>
+  <div class="soft-skills-grid">
+    <div class="soft-skill fade-in fade-in-delay-1"><div class="soft-skill-icon">🗣</div><div class="soft-skill-name">Communication</div><div class="soft-skill-desc">Floor speeches, position papers, and stakeholder coordination across large-scale events.</div></div>
+    <div class="soft-skill fade-in fade-in-delay-2"><div class="soft-skill-icon">⚡</div><div class="soft-skill-name">Adaptability</div><div class="soft-skill-desc">Switched roles across committees, countries, and frameworks — always hit the ground running.</div></div>
+    <div class="soft-skill fade-in fade-in-delay-3"><div class="soft-skill-icon">🤝</div><div class="soft-skill-name">Negotiation</div><div class="soft-skill-desc">Built blocs, resolved conflicts, and found consensus under competitive pressure.</div></div>
+    <div class="soft-skill fade-in fade-in-delay-1"><div class="soft-skill-icon">🧠</div><div class="soft-skill-name">Critical Thinking</div><div class="soft-skill-desc">Analyzed complex geopolitical positions and constructed logical, evidence-backed arguments.</div></div>
+    <div class="soft-skill fade-in fade-in-delay-2"><div class="soft-skill-icon">👥</div><div class="soft-skill-name">Leadership</div><div class="soft-skill-desc">Co-pioneered an org from zero — managed teams, logistics, finances, and cross-institution relations.</div></div>
+    <div class="soft-skill fade-in fade-in-delay-3"><div class="soft-skill-icon">📋</div><div class="soft-skill-name">Organization</div><div class="soft-skill-desc">Juggled academics, dev work, and large-scale event management simultaneously.</div></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<div class="section-wrap" id="testimonials">
+  <div class="section-label fade-in">Testimonials</div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in fade-in-delay-1">
+      <div class="testimonial-quote">"Working with Shahzaman was an absolute pleasure. He delivered exactly what I envisioned — clean code, modern UI, and a scalable backend. His communication was clear, he met every deadline, and even went the extra mile suggesting smart product improvements."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">AA</div>
+        <div><div class="testimonial-name">Aleem Ansari</div><div class="testimonial-role">Product Manager, TechCorp</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in fade-in-delay-2">
+      <div class="testimonial-quote">"Shahzaman is hands-down one of the best developers I've worked with. His ability to work independently, solve problems, and deliver a seamless user experience was top-notch. He's not just a developer — he's a partner who genuinely cares about your project's success."</div>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">JA</div>
+        <div><div class="testimonial-name">Jeff Abrams</div><div class="testimonial-role">CEO, Weekly Accounting</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="section-wrap" id="contact">
+  <div class="section-label fade-in">Contact</div>
+  <div class="contact-grid">
+    <div class="contact-left fade-in fade-in-delay-1">
+      <h2>Let's build something.</h2>
+      <p>Whether it's a product, a collab, or a job opportunity — I'm open to the conversation. Based in Lahore, available remotely.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:shazamanajmal2@gmail.com">
+          <div class="contact-link-icon">✉</div>
+          <div><div class="contact-link-val">shazamanajmal2@gmail.com</div><div class="contact-link-label">Email</div></div>
+        </a>
+        <a class="contact-link" href="tel:+923404655082">
+          <div class="contact-link-icon">📞</div>
+          <div><div class="contact-link-val">+92 340 4655082</div><div class="contact-link-label">Phone</div></div>
+        </a>
+        <a class="contact-link" href="https://linkedin.com/in/shahzaman-ajmal" target="_blank">
+          <div class="contact-link-icon" style="font-family:'Syne',sans-serif;font-weight:800;font-size:13px;">in</div>
+          <div><div class="contact-link-val">linkedin.com/in/shahzaman-ajmal</div><div class="contact-link-label">LinkedIn</div></div>
+        </a>
+        <a class="contact-link" href="https://github.com/Shazam-byte" target="_blank">
+          <div class="contact-link-icon" style="font-size:13px;font-weight:700;">gh</div>
+          <div><div class="contact-link-val">github.com/Shazam-byte</div><div class="contact-link-label">GitHub</div></div>
+        </a>
+      </div>
+    </div>
+    <div class="fade-in fade-in-delay-2">
+      <div class="form-group"><label>Name</label><input type="text" placeholder="Your name" /></div>
+      <div class="form-group"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Subject</label><input type="text" placeholder="What's this about?" /></div>
+      <div class="form-group"><label>Message</label><textarea placeholder="Tell me more..."></textarea></div>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Shahzaman Ajmal</div>
+  <div class="footer-copy">© 2026. All rights reserved.</div>
+</footer>
+
+<script>
+  // ── THEME TOGGLE
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+  }
+
+  // ── SMOOTH SCROLL
+  function scrollTo(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 72;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+
+  // ── SCROLL FADE-IN
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── PROJECT EXPAND
+  function toggleProject(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.project-card.expanded').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) {
+      card.classList.add('expanded');
+      setTimeout(() => {
+        const offset = 72;
+        const top = card.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 60);
+    }
+  }
+
+  // prevent code link from toggling card
+  document.querySelectorAll('.btn-code').forEach(btn => {
+    btn.addEventListener('click', e => e.stopPropagation());
+  });
+</script>
+</body>
+</html>
