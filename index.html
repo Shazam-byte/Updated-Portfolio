@@ -301,6 +301,88 @@
   .soft-skill-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
   .soft-skill-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
 
+
+
+  .de-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .de-intro {
+    font-size: 13.5px; color: var(--muted);
+    line-height: 1.7; max-width: 600px; margin-bottom: 28px;
+  }
+  .de-stats {
+    display: flex; gap: 96px; flex-wrap: wrap;
+    margin-bottom: 32px; padding: 16px 20px;
+    background: var(--tag-bg); border-radius: 14px;
+    border: 0.5px solid var(--border);
+  }
+  .de-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+  }
+  .de-stat-label { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .de-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .de-card {
+    background: var(--card); border: 0.5px solid var(--border);
+    border-radius: 14px; padding: 18px 20px 16px;
+    border-left: 3px solid var(--border);
+    transition: border-left-color 0.2s, transform 0.18s;
+  }
+  .de-card:hover { transform: translateY(-2px); }
+  .de-card.has-award { border-left-color: #d4a017; }
+  .de-card-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 10px; margin-bottom: 6px;
+  }
+  .de-committee {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 800;
+  }
+  .de-country-pill {
+    background: var(--tag-bg); color: var(--muted);
+    font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 100px;
+    white-space: nowrap; flex-shrink: 0;
+    border: 0.5px solid var(--border);
+  }
+  .de-desc {
+    font-size: 12.5px; color: var(--muted);
+    line-height: 1.65; margin-bottom: 12px;
+  }
+  .de-footer {
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 6px;
+  }
+  .de-event {
+    font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .de-event-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted); flex-shrink: 0;
+  }
+  .de-award {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 100px;
+    background: rgba(212,160,23,0.12); color: #9a6f00;
+    border: 0.5px solid rgba(212,160,23,0.3);
+  }
+  [data-theme="dark"] .de-award { color: var(--accent); }
+  .de-year-row {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 8px; margin-bottom: 4px;
+  }
+  .de-year-label {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); white-space: nowrap;
+  }
+  .de-year-line { flex: 1; height: 0.5px; background: var(--border); }
+
+
   /* ── TESTIMONIALS ── */
   .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .testimonial-card {
@@ -406,7 +488,7 @@
   <div class="hero-stats">
     <div><div class="hero-stat-num">4+</div><div class="hero-stat-label">Production Projects</div></div>
     <div><div class="hero-stat-num">2+</div><div class="hero-stat-label">Years of Experience</div></div>
-    <div><div class="hero-stat-num">300+</div><div class="hero-stat-label">MUN Delegates (Upcoming)</div></div>
+    <div><div class="hero-stat-num">250+</div><div class="hero-stat-label">MUN Delegates (Upcoming)</div></div>
     <div><div class="hero-stat-num">2028</div><div class="hero-stat-label">Expected Graduation</div></div>
   </div>
 </div>
@@ -575,12 +657,12 @@
 
   <div class="mun-card fade-in fade-in-delay-1">
     <div class="mun-accent"></div>
-    <div class="upcoming-badge">Upcoming — August 2026</div>
+    <div class="upcoming-badge">Upcoming — September 2026</div>
     <h2>Co-Pioneer, BULC MUN</h2>
     <p>Building BULC Model United Nations from the ground up alongside Talha — handling team recruitment, inter-university coordination, university approvals, finances, and full on-the-ground execution. One of the most ambitious student-led diplomatic simulations in Lahore, expecting 300+ delegates across multiple committees.</p>
     <div class="mun-details">
-      <div class="mun-detail"><div class="mun-detail-label">Scheduled</div><div class="mun-detail-val">August 2026</div></div>
-      <div class="mun-detail"><div class="mun-detail-label">Expected Scale</div><div class="mun-detail-val">300+ Delegates</div></div>
+      <div class="mun-detail"><div class="mun-detail-label">Scheduled</div><div class="mun-detail-val">September 2026</div></div>
+      <div class="mun-detail"><div class="mun-detail-label">Expected Scale</div><div class="mun-detail-val">250+ Delegates</div></div>
       <div class="mun-detail"><div class="mun-detail-label">Role</div><div class="mun-detail-val">Co-Pioneer &amp; Top Management</div></div>
     </div>
     <div class="mun-roles">
@@ -591,37 +673,101 @@
     </div>
   </div>
 
-  <div class="section-label fade-in" style="margin-top:38px;">Delegate Experience</div>
-  <p class="fade-in" style="font-size:14px;color:var(--muted);margin-bottom:20px;max-width:600px;">Competed as a delegate across multiple UN committees, representing different countries and crafting position papers, floor speeches, and bloc strategies.</p>
+ <!-- ═══ DELEGATE EXPERIENCE SECTION ═══ -->
 
-  <div class="delegate-grid">
-    <div class="delegate-card fade-in fade-in-delay-1">
-      <div class="delegate-card-header"><div class="delegate-committee">Pakistan National Assembly</div><div class="delegate-country">Rahila Durrani</div></div>
-      <div class="delegate-desc">Represented a national legislator in domestic policy debate, crafting legislation-style arguments and navigating parliamentary procedure.</div>
+<!-- Paste this in your HTML where the delegate section goes -->
+<div class="section-label">Delegate Experience</div>
+<p class="de-intro">6 committees across 5 conferences — representing 6 different countries, earning awards at 4 of them. Crafted position papers, delivered floor speeches, and led bloc negotiations at Lahore's top inter-university events.</p>
+
+<div class="de-stats">
+  <div><div class="de-stat-num">6</div><div class="de-stat-label">Committees</div></div>
+  <div><div class="de-stat-num">5</div><div class="de-stat-label">Conferences</div></div>
+  <div><div class="de-stat-num">4</div><div class="de-stat-label">Awards Won</div></div>
+  <div><div class="de-stat-num">6</div><div class="de-stat-label">Countries Represented</div></div>
+</div>
+
+<div class="de-grid">
+
+  <!-- 2024 -->
+  <div class="de-year-row"><span class="de-year-label">2024</span><div class="de-year-line"></div></div>
+
+  <div class="de-card">
+    <div class="de-card-top">
+      <div class="de-committee">UNSC</div>
+      <div class="de-country-pill">🇬🇧 United Kingdom</div>
     </div>
-    <div class="delegate-card fade-in fade-in-delay-2">
-      <div class="delegate-card-header"><div class="delegate-committee">Crisis Committee</div><div class="delegate-country">United Kingdom</div></div>
-      <div class="delegate-desc">Fast-paced crisis simulation requiring real-time strategic decisions, bloc formation, and rapid position adaptation under pressure.</div>
+    <div class="de-desc">Presented the UK's strategic positions, drafted resolution-style arguments, and navigated UNSC parliamentary procedure.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>BNUMUN VI &nbsp;·&nbsp; Lahore</div>
     </div>
-    <div class="delegate-card fade-in fade-in-delay-3">
-      <div class="delegate-card-header"><div class="delegate-committee">WOAH</div><div class="delegate-country">Egypt</div></div>
-      <div class="delegate-desc">Represented Egypt in the World Organisation for Animal Health, arguing national interests on global health and agricultural policy.</div>
+  </div>
+  <div style="visibility:hidden;" aria-hidden="true"></div>
+
+  <!-- 2025 -->
+  <div class="de-year-row"><span class="de-year-label">2025</span><div class="de-year-line"></div></div>
+
+  <div class="de-card">
+    <div class="de-card-top">
+      <div class="de-committee">UNSC</div>
+      <div class="de-country-pill">🇳🇬 Nigeria</div>
     </div>
-    <div class="delegate-card fade-in fade-in-delay-4">
-      <div class="delegate-card-header"><div class="delegate-committee">UNHRC</div><div class="delegate-country">Cuba</div></div>
-      <div class="delegate-desc">Argued Cuba's position at the UN Human Rights Council — defending contested stances through evidence-based debate and bloc diplomacy.</div>
+    <div class="de-desc">Represented Nigeria's national security stance and negotiated diplomacy-focused solutions within the UNSC framework.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>FORMUN XIII &nbsp;·&nbsp; Lahore</div>
     </div>
   </div>
 
-  <div class="section-label fade-in" style="margin-top:42px;">Soft Skills</div>
-  <div class="soft-skills-grid">
-    <div class="soft-skill fade-in fade-in-delay-1"><div class="soft-skill-icon">🗣</div><div class="soft-skill-name">Communication</div><div class="soft-skill-desc">Floor speeches, position papers, and stakeholder coordination across large-scale events.</div></div>
-    <div class="soft-skill fade-in fade-in-delay-2"><div class="soft-skill-icon">⚡</div><div class="soft-skill-name">Adaptability</div><div class="soft-skill-desc">Switched roles across committees, countries, and frameworks — always hit the ground running.</div></div>
-    <div class="soft-skill fade-in fade-in-delay-3"><div class="soft-skill-icon">🤝</div><div class="soft-skill-name">Negotiation</div><div class="soft-skill-desc">Built blocs, resolved conflicts, and found consensus under competitive pressure.</div></div>
-    <div class="soft-skill fade-in fade-in-delay-1"><div class="soft-skill-icon">🧠</div><div class="soft-skill-name">Critical Thinking</div><div class="soft-skill-desc">Analyzed complex geopolitical positions and constructed logical, evidence-backed arguments.</div></div>
-    <div class="soft-skill fade-in fade-in-delay-2"><div class="soft-skill-icon">👥</div><div class="soft-skill-name">Leadership</div><div class="soft-skill-desc">Co-pioneered an org from zero — managed teams, logistics, finances, and cross-institution relations.</div></div>
-    <div class="soft-skill fade-in fade-in-delay-3"><div class="soft-skill-icon">📋</div><div class="soft-skill-name">Organization</div><div class="soft-skill-desc">Juggled academics, dev work, and large-scale event management simultaneously.</div></div>
+  <div class="de-card has-award">
+    <div class="de-card-top">
+      <div class="de-committee">Crisis Committee</div>
+      <div class="de-country-pill">🇬🇧 United Kingdom</div>
+    </div>
+    <div class="de-desc">Led bloc formation and adapted positions under real-time pressure in a fast-paced intra-university crisis simulation.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>BULC Intra-University &nbsp;·&nbsp; Lahore</div>
+      <div class="de-award">🏅 HM Award</div>
+    </div>
   </div>
+
+  <div class="de-card has-award">
+    <div class="de-card-top">
+      <div class="de-committee">WOAH</div>
+      <div class="de-country-pill">🇪🇬 Egypt</div>
+    </div>
+    <div class="de-desc">Argued Egypt's national interests on global health and agricultural policy at the World Organisation for Animal Health.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>UVASMUN 2.0 &nbsp;·&nbsp; Lahore</div>
+      <div class="de-award">🏅 SM Award</div>
+    </div>
+  </div>
+
+  <div class="de-card has-award">
+    <div class="de-card-top">
+      <div class="de-committee">Crisis Committee</div>
+      <div class="de-country-pill">🇦🇺 Australia</div>
+    </div>
+    <div class="de-desc">Led cross-delegate strategy and bloc coordination in the inter-campus crisis simulation under real-time pressure.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>BULC Inter-Campus &nbsp;·&nbsp; Lahore</div>
+      <div class="de-award">🏅 OD Award</div>
+    </div>
+  </div>
+
+  <!-- 2026 -->
+  <div class="de-year-row"><span class="de-year-label">2026</span><div class="de-year-line"></div></div>
+
+  <div class="de-card has-award">
+    <div class="de-card-top">
+      <div class="de-committee">UNHRC</div>
+      <div class="de-country-pill">🇨🇺 Cuba</div>
+    </div>
+    <div class="de-desc">Defended Cuba's position at the UN Human Rights Council through evidence-based arguments and active bloc diplomacy.</div>
+    <div class="de-footer">
+      <div class="de-event"><span class="de-event-dot"></span>FORMUN XIV &nbsp;·&nbsp; Lahore</div>
+      <div class="de-award">🏅 SM Award</div>
+    </div>
+  </div>
+
 </div>
 
 <div class="divider"></div>
